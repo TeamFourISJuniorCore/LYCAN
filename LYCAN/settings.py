@@ -1,3 +1,5 @@
+import os
+
 """
 Django settings for LYCAN project.
 
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'LYCAN.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,14 +72,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LYCAN.wsgi.application'
 
-
+from getpass import getpass 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# Please don't missuse my password :)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'lycan',
+        'USER' : 'postgres',
+        'PASSWORD' : getpass(),
+        'HOST' : 'localhost'
     }
 }
 
