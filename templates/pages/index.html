@@ -1,5 +1,14 @@
 {%  extends 'base.html' %}
-
+{% load static %}
 {% block content%}
-<p class="">homepage</p>
+    <div class = "container">
+        {%for student in our_students %}
+        <p>
+            {{fName}}
+            {{student.lName}}
+            {{student.sectionNum}}
+            {{student.funfact}}
+        </p>
+        {% endfor %}
+    </div>
 {% endblock %}

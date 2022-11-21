@@ -1,9 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Student
 
 # Create your views here.
 def indexPageView(request):
-    return render(request, 'pages/index.html')
+    # data = Student.objects.all()
+    # context = {
+    #     "our_students" : data
+    # }
+    lastName = request.GET['McCoard']
+    data = Student.objects.filter(lName=lastName)
+
+    if data.count() > 0:
+        context = {
+            'our_students' : data
+        }
+    else :
+        context = {
+            'our_students' : 'sad day:('
+        }
+
+    return render(request, 'pages/index.html', context)
 
 def contactPageView(request):
     return render(request, 'pages/contact.html')

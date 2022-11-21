@@ -14,5 +14,6 @@ class Student (models.Model):
     def __str__(self):
         return (self.fName + self.lName)
     
+    
     class Meta:
         db_table = 'current_students'
