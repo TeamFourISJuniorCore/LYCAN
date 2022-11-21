@@ -8,16 +8,16 @@ def indexPageView(request):
     # context = {
     #     "our_students" : data
     # }
-    lastName = request.GET['McCoard']
-    data = Student.objects.filter(lName=lastName)
+    data = Student.objects.filter(lName="Heath")
 
     if data.count() > 0:
         context = {
-            'our_students' : data
+            'our_students' : data,
+            'results' : 'success!'
         }
     else :
         context = {
-            'our_students' : 'sad day:('
+            'results' : 'sad day:( no results'
         }
 
     return render(request, 'pages/index.html', context)

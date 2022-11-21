@@ -1,10 +1,12 @@
 {%  extends 'base.html' %}
 {% load static %}
 {% block content%}
+
+    {{results}}
     <div class = "container">
-        {%for student in our_students %}
+        {% for student in our_students %}
         <p>
-            {{fName}}
+            {{student.fName}}
             {{student.lName}}
             {{student.sectionNum}}
             {{student.funfact}}
