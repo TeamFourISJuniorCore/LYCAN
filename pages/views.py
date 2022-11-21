@@ -6,8 +6,11 @@ from .models import Student
 def indexPageView(request):
     # data = Student.objects.all()
     # context = {
-    #     "our_students" : data
+    #     'our_students' : data,
+    #     'results' : 'success!'
     # }
+    # return render(request, 'pages/index.html', context)
+
     data = Student.objects.filter(lName="Heath")
 
     if data.count() > 0:
