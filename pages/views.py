@@ -4,6 +4,7 @@ from .models import Student
 
 # Create your views here.
 def indexPageView(request):
+    #uncomment everything between here until the return for printing all things from the table
     # data = Student.objects.all()
     # context = {
     #     'our_students' : data,
@@ -11,6 +12,7 @@ def indexPageView(request):
     # }
     # return render(request, 'pages/index.html', context)
 
+    #uncomment everything below here to print filtered objects from the table
     data = Student.objects.filter(lName="Heath")
 
     if data.count() > 0:
