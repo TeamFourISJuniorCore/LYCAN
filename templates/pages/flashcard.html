@@ -2,6 +2,18 @@
 
 {% block content%}
 <p class="">flash card page</p>
+
+
+<div class = "container">
+    {% for student in our_students %}
+    <p>
+        {{student.fName}}
+        {{student.lName}}
+        {{student.sectionNum}}
+    </p>
+    {% endfor %}
+</div>
+
 {% endblock %}
 
 <!-- We need form here for createing new flashcards-->

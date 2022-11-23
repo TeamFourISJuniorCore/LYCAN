@@ -5,27 +5,25 @@ from .models import Student
 # Create your views here.
 def indexPageView(request):
     #uncomment everything between here until the return for printing all things from the table
-    # data = Student.objects.all()
-    # context = {
-    #     'our_students' : data,
-    #     'results' : 'success!'
-    # }
-    # return render(request, 'pages/index.html', context)
+    data = Student.objects.all()
+    context = {
+        'our_students' : data
+    }
+    return render(request, 'pages/index.html', context)
 
     #uncomment everything below here to print filtered objects from the table
-    data = Student.objects.filter(lName="Heath")
+    # data = Student.objects.filter(lName="Heath")
 
-    if data.count() > 0:
-        context = {
-            'our_students' : data,
-            'results' : 'success!'
-        }
-    else :
-        context = {
-            'results' : 'sad day:( no results'
-        }
+    # if data.count() > 0:
+    #     context = {
+    #         'our_students' : data
+    #     }
+    # else :
+    #     context = {
+    #         'results' : 'sad day:( no results'
+    #     }
 
-    return render(request, 'pages/index.html', context)
+    # return render(request, 'pages/index.html', context)
 
 def contactPageView(request):
     return render(request, 'pages/contact.html')
@@ -34,7 +32,11 @@ def loginPageView(request) :
     return render(request, 'pages/login.html')
 
 def flashcardPageView(request):
-    return render(request, 'pages/flashcard.html')
+    data = Student.objects.all()
+    context = {
+        'our_students' : data
+    }
+    return render(request, 'pages/flashcard.html', context)
 
 def libraryPageView(request):
     return render(request, 'pages/library.html')

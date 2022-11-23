@@ -2,7 +2,6 @@
 {% load static %}
 {% block content%}
 
-    {{results}}
     <div class = "container">
         {% for student in our_students %}
         <p>
@@ -10,7 +9,28 @@
             {{student.lName}}
             {{student.sectionNum}}
             {{student.funfact}}
+            {{student.gender}}
         </p>
         {% endfor %}
     </div>
+
+    <form action="/addStudent" method="post">
+        <label for="firstName">First Name: </label>
+            <input type="text" name='firstName'><br>
+        <label for="lastName">Last Name: </label>
+            <input type="text" name='lastName'><br>
+        <label for="Section">Section Number: </label>
+            <input type="number" name='Section'><br>
+        <label for="groupNum">Group Number: </label>
+            <input type="number" name='groupNum'><br>
+        <label for="male">Male: </label>
+            <input type="radio" name='gender' id='Male' value='M' checked><br>
+        <label for="female">Female: </label>
+            <input type="radio" name='gender' id='Female' value='F'><br>
+        <label for="funfact">Fun Fact: </label>
+            <input type="text" name='funfact'><br>
+        <label for="photo">Upload photo: </label>
+            <input type="file" name="photo" id="photofile" accept='image/png, image/jpeg'><br>
+        <button type="submit">Add Me</button>
+    </form>
 {% endblock %}
