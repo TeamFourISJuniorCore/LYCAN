@@ -99,9 +99,15 @@ def editStudent(request):
     updatedStud.sectionNum = request.POST['Section']
     updatedStud.groupNum = request.POST['groupNum']
     updatedStud.gender = request.POST['gender']
-    updatedStud.photo = request.POST['photo']
     updatedStud.feedback = request.POST['feedback']
-
+    print('old photo:',updatedStud.photo.url)
+    print('new photo:',request.POST['photo'])
+    
+    if request.POST['photo']:
+        print("You've made it to checkpoint 3")
+        # updatedStud.photo = request.POST['photo']
+        updatedStud.photo = 'photos/' + request.POST['photo'] # possibly parse spaces into undrscores
+        
     updatedStud.save()
 
     return libraryPageView(request)

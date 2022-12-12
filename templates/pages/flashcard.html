@@ -1,25 +1,38 @@
 {%  extends 'base.html' %}
 
 {% block content%}
+<div class="container">
+
+{% for student in our_students %}
 
 <div class="scene scene--card">
     <div class="card">
-      <div class="card__face card__face--front">{{student.fName}} {{student.lName}}</div>
-      <div class="card__face card__face--back">back</div>
+      <div class="card__face card__face--back shadow-lg">{{student.fName}} {{student.lName}}<br>{{student.sectionNum}}-{{student.groupNum}}<br>
+        {% if student.funfact|length >= 30 %}
+        View the fun fact on the View Flashcard page
+        {% else %}
+        {{student.funfact}}
+        {% endif %}
+      </div>
+      <div class="card__face card__face--front shadow-lg">
+        <img style="max-height:100%; object-fit: contain; max-width:100%;" src="{{student.photo.url}}" alt="Could not find image"/>
+      </div>
+      <!-- img style="max-height:250px; object-fit: contain;" src="{{student.photo.url}}" alt="Could not find image"> -->
     </div>
-  </div>
+</div>
+{% endfor %}
+</div>
 <style>
-
 body { font-family: sans-serif; }
-
 .scene {
   display: inline-block;
-  width: 200px;
-  height: 260px;
+  width: 400px;
+  height: 360px;
 /*   border: 1px solid #CCC; */
   margin: 40px 0;
   perspective: 600px;
 }
+
 
 .card {
   position: relative;
@@ -39,20 +52,21 @@ body { font-family: sans-serif; }
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 260px;
+  line-height: 70px;
   color: white;
   text-align: center;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 35px;
   backface-visibility: hidden;
 }
 
 .card__face--front {
-  background: crimson;
+  background: white;
+  border: none;
 }
 
 .card__face--back {
-  background: slateblue;
+  background: #0D6EFD;
   transform: rotateY(180deg);
 }
 
@@ -60,10 +74,11 @@ body { font-family: sans-serif; }
   <script>var cards = document.querySelectorAll('.card');
 
     [...cards].forEach((card)=>{
-      card.addEventListener( 'click', function() {
+      card.addEventListener('click', function() {
         card.classList.toggle('is-flipped');
       });
     });</script>
+
 <!--<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -168,5 +183,31 @@ This is a Footer
 </div>
 </div>
 </body>
+
+
+<body>
+    <div id="carouselExampleControls" class="carousel slide" style="max-height:250px; max-width: 25%; object-fit: contain;">
+        <div class="carousel-inner">
+          <div  class="carousel-item active">
+            <img  src="https://i.postimg.cc/W4Q766mZ/IMG-0853.png" class="d-block w-100" alt="ripppppppppp">
+          </div>
+        </div>
+        {% for student in our_students %}
+        <div class="carousel-inner">
+            <div  class="carousel-item">
+              <img  src="{{student.photo.url}}" class="d-block w-100" alt="ripppppppppp">
+            </div>
+          </div> {% endfor %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </body>
+ 
 -->
 {% endblock %}

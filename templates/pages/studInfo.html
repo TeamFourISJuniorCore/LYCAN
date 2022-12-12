@@ -35,8 +35,12 @@
                 <input type="text" class="form-control" name='funfact' class="btn btn-sm btn-outline-secondary" value='{{student.funfact}}'>
             </div>
             <div class="mb-3">
-                <label for="photo" class="form-label">Upload photo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <input type="file" class="form-control form-control-lg" name="photo" id="photofile" accept='image/png, image/jpeg' class="btn btn-sm btn-outline-secondary">
+                <div style="height: 200px; width:200px;">
+                    <img style="max-height: 100%;" src="{{student.photo.url}}"/>
+                </div>
+                <br/>
+                <label for="photo" class="form-label">Upload New photo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="file" class="form-control form-control-lg" name="photo" id="photofile" accept='image/png, image/jpeg' class="btn btn-sm btn-outline-secondary"/>
             </div>
             <div class="input group mb-3">
                 <label for="feedback" class="form-label">Have any feedback for us?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>

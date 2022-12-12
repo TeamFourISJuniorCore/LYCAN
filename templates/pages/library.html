@@ -6,9 +6,9 @@
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">LYCAN</h1>
-          <p class="lead text-muted">We are the IS CORE of 2022, be proud and Learn Your Classmates And Names</p>
+          <p class="lead text-muted">We are the IS CORE of 2022-2023, be proud and Learn Your Classmates And Names</p>
           <p>
-            <a href="/askhailsfuaf" class="btn btn-primary my-2">Study here</a>
+            <a href="{% url 'flashcard' %}" class="btn btn-primary my-2">Study here</a>
             <a href="#addStudent" class="btn btn-secondary my-2">Add yourself or another student</a>
           </p>
         </div>
@@ -21,10 +21,8 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for student in our_students %}
                 <div class="col">
-                    <div class="card shadow-sm" h>
-                        <!--                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/> <text x="50%" y="50%" fill="#eceeef" dy=".3em">Could not find image for {{student.fName}} {{student.lName}}</text></svg> -->
-                    <!-- <svg class="bd-placeholder-img card-img-top" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><img src="{{student.photo.url}}" alt="Could not find image"/> </svg> -->
-                    <img src="{{student.photo.url}}" alt="Could not find image"/>
+                    <div class="card shadow-sm">
+                        <img style="max-height:250px; object-fit: contain;" src="{{student.photo.url}}" alt="Could not find image"/>
                         <div class="card-body">
                             <p class="card-text">{{student.fName}} {{student.lName}}</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -62,6 +60,8 @@
         </div>
     </div>
 {% endfor %} {% endcomment %}
+
+<br><br>
 <!--Divide the section here-->
 <div style="padding: 4%; width: 50%;border: 1px solid; border-color: #adb5bd; margin: auto;">
     <section style="display: flex; justify-content: center;">
@@ -97,7 +97,7 @@
     </div>
     <div class="mb-3">
         <!--<label for="photo" class="form-label">Upload photo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
-        <input type="file" class="form-control form-control-lg" name="photo" id="photofile" accept='image/png, image/jpeg' class="btn btn-sm btn-outline-secondary">
+        <input type="file" class="form-control form-control-lg" name="photo" id="photofile" accept='image/png, image/jpeg' class="btn btn-sm btn-outline-secondary" required/>
     </div>
     <div class="input group mb-3">
         <!--<label for="feedback" class="form-label">Have any feedback for us?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
