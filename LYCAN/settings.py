@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'lycan',
         'USER' : 'postgres',
-        'PASSWORD' : 'Gr@ft1ng',
+        'PASSWORD' : getpass(),
         'HOST' : 'localhost'
     }
 }
