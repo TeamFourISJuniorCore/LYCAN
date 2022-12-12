@@ -105,9 +105,10 @@ def editStudent(request):
     # print('new photo:',request.POST['photo'])
     
     # print(request.FILES)
-    if len(request.FILES['photo']) != 0:
+    if len(request.FILES) != 0:
         # print("You've made it to checkpoint 3")
         # updatedStud.photo = request.POST['photo']
+        updatedStud.photo.delete()
         updatedStud.photo = request.FILES['photo']
         
     updatedStud.save()
@@ -125,7 +126,7 @@ def delStud(request):
     deletedStudent = data[0]
 
     print('We deleted {} {}'.format(deletedStudent.fName, deletedStudent.lName))
-
+    deletedStudent.photo.delete()
     deletedStudent.delete()
 
     return libraryPageView(request)
