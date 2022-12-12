@@ -1,6 +1,65 @@
 {%  extends 'base.html' %}
 
 {% block content%}
-<p class="">contact page</p>
+<!-- <p class="">contact page</p> -->
+
+<HTML>
+    <HEAD>
+      <TITLE>Contact Page</TITLE>
+    </HEAD>
+    <BODY>
+        <br>
+        <br>
+    <style>
+      .aside {
+            width: 500px;
+            float: left;
+            border-top: 1px solid #21a1e1;
+            border-left: 1px solid #21a1e1;
+            border-right: 1px solid #21a1e1;
+            border-bottom: 1px solid #21a1e1;
+            border-color: black;
+            padding-left: 20px;
+            margin-left: 20px;
+            padding-top: 1px;
+        }
+
+        .header{
+            text-align: center;
+        }
+
+    </style>
+    <h1 class = 'header'>Tell us what you think!</h1>
+    <br>
+    <div style="padding: 4%; width: 50%;border: 1px solid; border-color: #adb5bd; margin: auto;">
+        <section style="display: flex; justify-content: left;">
+      
+      <FORM action="mailto:LYCAN@IS.com" method="post" enctype="text/plain">
+        <H2>Feedback Form</H2>
+        <br>
+        Enter First Name :<BR>
+        <INPUT type="text" name="firstname" placeholder="First Name">
+        <br>
+        <br>
+        Enter Last Name :<BR>
+        <INPUT type="text" name="lastname"  placeholder="Last Name">
+        <BR>
+        <br>
+        <!--This uses the new HTML "email" INPUT type which will automatically validates the email address when the SUBMIT button is clicked-->
+        Enter E-mail Address :<BR>
+        <INPUT type="email" name="mail" placeholder="E-mail Address">
+        <BR>
+        <BR>
+          Comment :<BR>        
+          <TEXTAREA rows="6" cols="50" name="commentfield"></TEXTAREA>
+          <BR>
+          <BR>
+          <INPUT TYPE="submit" value="Send Feedback">
+          <INPUT TYPE="reset" value="Reset">
+      </FORM>
+      <br>
+    </div>
+    </BODY>  
+  </HTML>
 {% endblock %}
 <!-- We need form here for feedback-->
