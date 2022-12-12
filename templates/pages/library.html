@@ -65,7 +65,7 @@
 <!--Divide the section here-->
 <div style="padding: 4%; width: 50%;border: 1px solid; border-color: #adb5bd; margin: auto;">
     <section style="display: flex; justify-content: center;">
-<form id = 'addStudent' action="{% url 'addStudent' %}" method="post">
+<form id = 'addStudent' action="{% url 'addStudent' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
     <H2 sty>Add A Student</H2>

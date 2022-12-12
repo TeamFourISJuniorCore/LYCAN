@@ -5,7 +5,7 @@
 <br>
 <div style="padding: 4%; width: 50%;border: 1px solid; border-color: #adb5bd; margin: auto;">
     <section style="display: flex; justify-content: center;">
-        <form id = 'editStudent' action="{% url 'editStudent' %}" method="post">
+        <form id = 'editStudent' action="{% url 'editStudent' %}" method="post" enctype="multipart/form-data">
             <legend><h1 class="fw-light">{{student.fName}} {{student.lName}}</h1></legend>
             {% csrf_token %}
             <div class="mb-3">

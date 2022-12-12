@@ -58,10 +58,11 @@ def addStudent(request):
     thisStudent.sectionNum = request.POST['Section']
     thisStudent.groupNum = request.POST['groupNum']
     thisStudent.gender = request.POST['gender']
-    thisStudent.photo = request.POST['photo']
+    thisStudent.photo = request.FILES['photo']
     thisStudent.feedback = request.POST['feedback']
     # thisStudent.fName = request.POST['firstName']
-    print (thisStudent)
+
+    # print (thisStudent)
     thisStudent.save()
 
     # data = Student.objects.all()
@@ -100,13 +101,14 @@ def editStudent(request):
     updatedStud.groupNum = request.POST['groupNum']
     updatedStud.gender = request.POST['gender']
     updatedStud.feedback = request.POST['feedback']
-    print('old photo:',updatedStud.photo.url)
-    print('new photo:',request.POST['photo'])
+    # print('old photo:',updatedStud.photo.url)
+    # print('new photo:',request.POST['photo'])
     
-    if request.POST['photo']:
-        print("You've made it to checkpoint 3")
+    # print(request.FILES)
+    if len(request.FILES['photo']) != 0:
+        # print("You've made it to checkpoint 3")
         # updatedStud.photo = request.POST['photo']
-        updatedStud.photo = 'photos/' + request.POST['photo'] # possibly parse spaces into undrscores
+        updatedStud.photo = request.FILES['photo']
         
     updatedStud.save()
 
