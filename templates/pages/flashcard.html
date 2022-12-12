@@ -1,98 +1,172 @@
 {%  extends 'base.html' %}
 
 {% block content%}
-<main>       
-    <section class="py-5 text-center container">
-      <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">LYCAN</h1>
-          <p class="lead text-muted">We are the IS CORE of 2022, be proud and Learn Your Classmates And Names</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Study here</a>
-            <a href="#" class="btn btn-secondary my-2">Add yourself or another student here</a>
-          </p>
-        </div>
-      </div>
-    </section>
-  
-    <div class="album py-5 bg-light">
-      <div class="container">
-  
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for student in our_students %}
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Could not find image for {{student.fName}} {{student.lName}}</text></svg>
 
-                    <div class="card-body">
-                        <p class="card-text">{{student.fName}} {{student.lName}}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                        </div>
-                        <small class="text-muted">Section Number {{student.sectionNum}}</small>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
+<div class="scene scene--card">
+    <div class="card">
+      <div class="card__face card__face--front">{{student.fName}} {{student.lName}}</div>
+      <div class="card__face card__face--back">back</div>
     </div>
-</main>
+  </div>
+<style>
 
+body { font-family: sans-serif; }
 
+.scene {
+  display: inline-block;
+  width: 200px;
+  height: 260px;
+/*   border: 1px solid #CCC; */
+  margin: 40px 0;
+  perspective: 600px;
+}
 
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1s;
+}
 
+.card.is-flipped {
+  transform: translateX(-100%) rotateY(-180deg);
+}
 
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 260px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  backface-visibility: hidden;
+}
 
+.card__face--front {
+  background: crimson;
+}
 
+.card__face--back {
+  background: slateblue;
+  transform: rotateY(180deg);
+}
 
+</style>
+  <script>var cards = document.querySelectorAll('.card');
 
-
-
-
-    {% for student in our_students %}
-        <div class="col">
-            <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Could not find image for {{student.fName}} {{student.lName}}</text></svg>
-
-            <div class="card-body">
-                <p class="card-text">{{student.fName}} {{student.lName}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">{{student.sectionNum}}</small>
-                </div>
-            </div>
-            </div>
-        </div>
-    {% endfor %}
-
-{% endblock %}
-
-{% comment %} We can uncomment this or move the html to another page. I was just trying to find a bootstrap template that could work
-{%  extends 'base.html' %}
-
-{% block content%}
-<p class="">flash card page</p>
-
-
-<div class = "container">
-    {% for student in our_students %}
-    <p>
-        {{student.fName}}
-        {{student.lName}}
-        {{student.sectionNum}}
-    </p>
-    {% endfor %}
+    [...cards].forEach((card)=>{
+      card.addEventListener( 'click', function() {
+        card.classList.toggle('is-flipped');
+      });
+    });</script>
+<!--<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style type="text/css">
+.image-flip:click .backside, .image-flip.click .backside {
+-webkit-transform: rotateY(0deg);
+-moz-transform: rotateY(0deg);
+-o-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+transform: rotateY(0deg);
+}
+.image-flip:click .frontside, .image-flip.click .frontside {
+-webkit-transform: rotateY(180deg);
+-moz-transform: rotateY(180deg);
+-o-transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+.image-flip {
+margin-bottom:200px;
+width: 300px;
+height: 250px;
+}
+.mainflip {
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-ms-transition: 1s;
+-moz-transition: 1s;
+-moz-transform: perspective(1000px);
+-moz-transform-style: preserve-3d;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: relative;
+}
+.frontside, .backside {
+-webkit-backface-visibility: hidden;
+-moz-backface-visibility: hidden;
+-ms-backface-visibility: hidden;
+backface-visibility: hidden;
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-moz-transition: 1s;
+-moz-transform-style: preserve-3d;
+-o-transition: 1s;
+-o-transform-style: preserve-3d;
+-ms-transition: 1s;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: absolute;
+top: 0;
+left: 0;
+}
+.frontside {
+-webkit-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+z-index: 2;
+}
+.backside {
+background: white;
+-webkit-transform: rotateY(-180deg);
+-moz-transform: rotateY(-180deg);
+-o-transform: rotateY(-180deg);
+-ms-transform: rotateY(-180deg);
+transform: rotateY(-180deg);
+}
+.card, .card-img-top {
+border-radius: 0;
+}
+</style>
+</head>
+<body>
+<div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+<div class="image-flip" onClick="this.classList.toggle('hover');"> 
+<div class="mainflip">
+<div class="frontside">
+<div class="card" style="width:20rem;">
+<img class="card-img-top img- fluid" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="card image">
+<div class="card-body">
+ <h4 class="card-title">{{student.fName}} {{student.lName}}</h4> 
+<p class="card-text">This is basic card with image on top, title, description and button.</p>
 </div>
-
-{% endblock %} 
-{% endcomment %}
-
-<!-- We need form here for createing new flashcards-->
+</div>
+</div>
+<div class="backside">
+<div class="card" style="width:20rem;">
+<div class="card-header">
+This is a Header
+</div>
+<div class="card-body">
+<h4 class="card-title">Card Title</h4>
+<p class="card-text">This is a card component with header and footer.</p>
+<a href="#" class="btn btn-info btn-md">Info Button</a>
+</div>
+<div class="card-footer">
+This is a Footer
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+-->
+{% endblock %}

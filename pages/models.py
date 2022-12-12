@@ -8,12 +8,11 @@ class Student (models.Model):
     sectionNum = models.IntegerField()
     groupNum = models.IntegerField()
     gender = models.CharField(max_length=1)
-    photoUrl = models.CharField(max_length=500)
+    photo = models.ImageField(upload_to='photos')
     feedback = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return (self.fName + self.lName)
-    
     
     class Meta:
         db_table = 'current_students'

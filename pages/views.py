@@ -39,8 +39,89 @@ def flashcardPageView(request):
     return render(request, 'pages/flashcard.html', context)
 
 def libraryPageView(request):
-    return render(request, 'pages/library.html')
+    data = Student.objects.all()
+    context = {
+        'our_students' : data
+    }
+    return render(request, 'pages/library.html', context)
 
+def addStudent(request):
+    # if request.method = POST: Not sure how to implement this line. It's in the text book
+    
+# add a student here, then redirect to flashcard page
+# instantiate the student
+    thisStudent = Student()
+    # add attributes according to the form
+    thisStudent.fName = request.POST['firstName']
+    thisStudent.lName = request.POST['lastName']
+    thisStudent.funfact = request.POST['funfact']
+    thisStudent.sectionNum = request.POST['Section']
+    thisStudent.groupNum = request.POST['groupNum']
+    thisStudent.gender = request.POST['gender']
+    thisStudent.photo = request.POST['photo']
+    thisStudent.feedback = request.POST['feedback']
+    # thisStudent.fName = request.POST['firstName']
+    print (thisStudent)
+    thisStudent.save()
+
+    # data = Student.objects.all()
+    # context = {
+    #     'our_students' : data
+    # }
+    # return render(request, 'pages/library.html', context)
+    return libraryPageView(request)
+
+
+def studInfoPageView(request, stud_id):
+
+    data = Student.objects.filter(id = stud_id)
+
+    if len(data) > 1:
+        data = ['There was more than one student with this id']
+
+    context = {
+        'student' : data[0]
+    }
+    return render (request, 'pages/studInfo.html', context)
+
+
+def editStudent(request):
+
+    data = Student.objects.filter(id = request.POST['id'])
+
+    if len(data) > 1:
+        return render(request, 'pages/studInfo.html', context = 'That id has more than one student')
+
+    updatedStud = data[0]
+    updatedStud.fName = request.POST['firstName']
+    updatedStud.lName = request.POST['lastName']
+    updatedStud.funfact = request.POST['funfact']
+    updatedStud.sectionNum = request.POST['Section']
+    updatedStud.groupNum = request.POST['groupNum']
+    updatedStud.gender = request.POST['gender']
+    updatedStud.photo = request.POST['photo']
+    updatedStud.feedback = request.POST['feedback']
+
+    updatedStud.save()
+
+    return libraryPageView(request)
+
+
+
+def delStud(request):
+    data = Student.objects.filter(id = request.POST['id'])
+    
+    if len(data) > 1:
+        return render(request, 'pages/studInfo.html', context = 'That id has more than one student')
+    
+    deletedStudent = data[0]
+
+    print('We deleted {} {}'.format(deletedStudent.fName, deletedStudent.lName))
+
+    deletedStudent.delete()
+
+    return libraryPageView(request)
+    
 
 # # for reference:
 # def indexPageView(request):
