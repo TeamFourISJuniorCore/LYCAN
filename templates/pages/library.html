@@ -33,7 +33,6 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a type="button" class="btn btn-sm btn-outline-secondary" href='{% url "studInfoPageView" stud_id=student.id %}'>Edit</a>
-                                    <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
                                 </div>
                                 <small class="text-muted">Section Number {{student.sectionNum}}</small>
                             </div>
@@ -47,27 +46,7 @@
     </div>
 </main>
 
-
-{% comment %} {% for student in our_students %}
-    <div class="col">
-        <div class="card shadow-sm">
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Could not find image for {{student.fName}} {{student.lName}}</text></svg>
-
-        <div class="card-body">
-            <p class="card-text">{{student.fName}} {{student.lName}}</p>
-            <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary" >View</button>
-            </div>
-            <small class="text-muted">{{student.sectionNum}}</small>
-            </div>
-        </div>
-        </div>
-    </div>
-{% endfor %} {% endcomment %}
-
 <br><br>
-<!--Divide the section here-->
 <div style="padding: 4%; width: 50%;border: 1px solid; border-color: #adb5bd; margin: auto;">
     <section style="display: flex; justify-content: center;">
 <form id = 'addStudent' action="{% url 'addStudent' %}" method="post" enctype="multipart/form-data">
@@ -75,19 +54,15 @@
     <div class="mb-3">
     <H2 sty>Add A Student</H2>
     <br>
-    <!--<label for="firstName" class="form-label">First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
         <input type="text" class="form-control" name='firstName' placeholder="First Name">
     </div>
     <div class="mb-3">
-        <!--<label for="lastName" class="form-label">Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
         <input type="text" class="form-control" name='lastName' placeholder="Last Name">
     </div>
     <div class="mb-3">
-        <!--<label for="Section"class="form-label">Section Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
         <input type="number" class="form-control" name='Section' placeholder="Section Number">
     </div>
     <div class="mb-3">
-        <!--<label for="groupNum" class="form-label">Group Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
         <input type="number" class="form-control" name='groupNum' placeholder="Group Number">
     </div>
     <div class="form-check">
@@ -97,15 +72,12 @@
         <input type="radio" class="form-check-input" name='gender' id='Female' value='F'>
     </div><br>
     <div class="mb-3">
-        <!--<label for="funfact" class="form-label">Fun Fact:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
         <input type="text" class="form-control" name='funfact' class="btn btn-sm btn-outline-secondary" placeholder="Fun Fact">
     </div>
     <div class="mb-3">
-        <!--<label for="photo" class="form-label">Upload photo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
         <input type="file" class="form-control form-control-lg" name="photo" id="photofile" accept='image/png, image/jpeg' class="btn btn-sm btn-outline-secondary" required/>
     </div>
     <div class="input group mb-3">
-        <!--<label for="feedback" class="form-label">Have any feedback for us?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
 <span class="input-group-text">Feedback</span>
         <textarea class="form-control" name='feedback' placeholder="Add Feedback"></textarea>
     </div>
@@ -115,25 +87,3 @@
 </div>
 
 {% endblock %}
-
-{% comment %} We can uncomment this or move the html to another page. I was just trying to find a bootstrap template that could work
-{%  extends 'base.html' %}
-
-{% block content%}
-<p class="">flash card page</p>
-
-
-<div class = "container">
-    {% for student in our_students %}
-    <p>
-        {{student.fName}}
-        {{student.lName}}
-        {{student.sectionNum}}
-    </p>
-    {% endfor %}
-</div>
-
-{% endblock %} 
-{% endcomment %}
-
-<!-- We need form here for createing new flashcards-->

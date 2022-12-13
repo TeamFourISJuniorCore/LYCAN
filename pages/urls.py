@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import * # indexPageView, contactPageView, flashcardPageView, loginPageView, libraryPageView
+from .views import *
 
 urlpatterns = [
     path("", indexPageView, name="index"),
