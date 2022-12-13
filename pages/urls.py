@@ -11,4 +11,5 @@ urlpatterns = [
     path('editStudent/<int:stud_id>/',  studInfoPageView, name='studInfoPageView'),
     path('editStudent', editStudent, name='editStudent'),
     path('delStud', delStud, name='delStud'),
+    path('filter', filterFlashcards, name='filter'),
 ]

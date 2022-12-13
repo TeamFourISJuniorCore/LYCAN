@@ -1,23 +1,58 @@
 {%  extends 'base.html' %}
 
 {% block content%}
-<div class="container">
+<br>
+<div style="padding: 4%; width: 50%;border: 1px solid; border-color: #adb5bd; margin: auto;">
+<section style="display: flex; justify-content: center;">
 
-{% for student in our_students %}
+  <form id = 'filterStudent' action="{% url 'filter' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+    <br>
+    <!--<label for="firstName" class="form-label">First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
+        <input type="text" class="form-control" name='firstName' placeholder="First Name">
+    </div>
+    <div class="mb-3">
+        <!--<label for="lastName" class="form-label">Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
+        <input type="text" class="form-control" name='lastName' placeholder="Last Name">
+    </div>
+    <div class="mb-3">
+        <!--<label for="Section"class="form-label">Section Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
+        <input type="number" class="form-control" name='section' placeholder="Section Number">
+    </div>
+    <div class="mb-3">
+        <!--<label for="groupNum" class="form-label">Group Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
+        <input type="number" class="form-control" name='group' placeholder="Group Number">
+    </div>
+    <div class="form-check">
+        <label for="male" class="form-check-label">Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="radio" class="form-check-input" name='gender' id='Male' value='M'><br>
+        <label for="female" class="form-check-label">Female&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="radio" class="form-check-input" name='gender' id='Female' value='F'>
+    </div><br>
+
+    <button type="submit" class="btn btn-primary">Apply Filter</button>
+</form>
+</section>
+</div>
+<div class="container">
+  {% for student in our_students %}
 
 <div class="scene scene--card">
     <div class="card">
-      <div class="card__face card__face--back shadow-lg">{{student.fName}} {{student.lName}}<br>{{student.sectionNum}}-{{student.groupNum}}<br>
-        {% if student.funfact|length >= 30 %}
-        View the fun fact on the View Flashcard page
+      <div class="card__face card__face--back shadow-lg" style="display: flex; flex-direction: column; justify-content:center; padding: 15px;">
+        {{student.fName}} {{student.lName}}<br>{{student.sectionNum}}-{{student.groupNum}}<br>
+        <div style="font-size: 15px;">
+        {% if student.funfact|length >= 85 %}
+        View the fun fact on the Edit Flashcard page
         {% else %}
         {{student.funfact}}
         {% endif %}
+        </div>
       </div>
-      <div class="card__face card__face--front shadow-lg">
+      <div class="card__face card__face--front shadow-lg" style="display: flex; flex-direction: column; justify-content:center;">
         <img style="max-height:100%; object-fit: contain; max-width:100%;" src="{{student.photo.url}}" alt="Could not find image"/>
       </div>
-      <!-- img style="max-height:250px; object-fit: contain;" src="{{student.photo.url}}" alt="Could not find image"> -->
     </div>
 </div>
 {% endfor %}
@@ -52,11 +87,11 @@ body { font-family: sans-serif; }
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 70px;
+  line-height: 45px;
   color: white;
   text-align: center;
   font-weight: bold;
-  font-size: 35px;
+  font-size: 27px;
   backface-visibility: hidden;
   border: 1px solid grey;
   border-radius: 4px;
@@ -69,6 +104,7 @@ body { font-family: sans-serif; }
 
 .card__face--back {
   background: #0D6EFD;
+  opacity: 0.7;
   transform: rotateY(180deg);
 }
 

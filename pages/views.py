@@ -31,6 +31,23 @@ def contactPageView(request):
 def loginPageView(request) :
     return render(request, 'pages/login.html')
 
+def filterFlashcards(request):
+
+    section = request.POST["section"]
+    group = request.POST["group"]
+    try:
+        gender = request.POST["gender"]
+    except:
+        gender = ""
+    firstName = request.POST["firstName"]
+    lastName = request.POST["lastName"]
+    data = Student.objects.filter(fName__contains=firstName, lName__contains=lastName, sectionNum__contains=section, groupNum__contains=group, gender__contains=gender)
+
+    context = {
+        'our_students' : data
+    }
+    return render(request, 'pages/flashcard.html', context)
+
 def flashcardPageView(request):
     data = Student.objects.all()
     context = {
