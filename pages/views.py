@@ -11,8 +11,8 @@ def contactPageView(request):
     return render(request, 'pages/contact.html')
 
 # this page hasn't yet been implemented
-def loginPageView(request) :
-    return render(request, 'pages/login.html')
+# def loginPageView(request) :
+#     return render(request, 'pages/login.html')
 
 # this page is referenced in the flashcard.html page and it just returns different student objects based the filters entered
 def filterFlashcards(request):
