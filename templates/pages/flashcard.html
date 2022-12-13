@@ -1,10 +1,16 @@
 {%  extends 'base.html' %}
 
 {% block content%}
+<!--
+  This is the flashcard page. It inherits from the base.html file and displays 'flashcards' for each student in the database
+  At the top we have a form which filters the students so you can search for someone or a specific group.
+  Below are the results with pictures that flip to reveal names and other information
+-->
+
 <br>
 <div style="padding: 4%; width: 50%;border: 1px solid; border-color: #adb5bd; margin: auto;">
 <section style="display: flex; justify-content: center;">
-
+  <!--This is the form that filters the data, it uses the 'filter' route-->
   <form id = 'filterStudent' action="{% url 'filter' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
@@ -35,6 +41,7 @@
 </form>
 </section>
 </div>
+<!--Within this container is the for loop that loops through the data passed and displays a flash card-->
 <div class="container">
   {% for student in our_students %}
 
@@ -117,135 +124,4 @@ body { font-family: sans-serif; }
       });
     });</script>
 
-<!--<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<style type="text/css">
-.image-flip:click .backside, .image-flip.click .backside {
--webkit-transform: rotateY(0deg);
--moz-transform: rotateY(0deg);
--o-transform: rotateY(0deg);
--ms-transform: rotateY(0deg);
-transform: rotateY(0deg);
-}
-.image-flip:click .frontside, .image-flip.click .frontside {
--webkit-transform: rotateY(180deg);
--moz-transform: rotateY(180deg);
--o-transform: rotateY(180deg);
-transform: rotateY(180deg);
-}
-.image-flip {
-margin-bottom:200px;
-width: 300px;
-height: 250px;
-}
-.mainflip {
--webkit-transition: 1s;
--webkit-transform-style: preserve-3d;
--ms-transition: 1s;
--moz-transition: 1s;
--moz-transform: perspective(1000px);
--moz-transform-style: preserve-3d;
--ms-transform-style: preserve-3d;
-transition: 1s;
-transform-style: preserve-3d;
-position: relative;
-}
-.frontside, .backside {
--webkit-backface-visibility: hidden;
--moz-backface-visibility: hidden;
--ms-backface-visibility: hidden;
-backface-visibility: hidden;
--webkit-transition: 1s;
--webkit-transform-style: preserve-3d;
--moz-transition: 1s;
--moz-transform-style: preserve-3d;
--o-transition: 1s;
--o-transform-style: preserve-3d;
--ms-transition: 1s;
--ms-transform-style: preserve-3d;
-transition: 1s;
-transform-style: preserve-3d;
-position: absolute;
-top: 0;
-left: 0;
-}
-.frontside {
--webkit-transform: rotateY(0deg);
--ms-transform: rotateY(0deg);
-z-index: 2;
-}
-.backside {
-background: white;
--webkit-transform: rotateY(-180deg);
--moz-transform: rotateY(-180deg);
--o-transform: rotateY(-180deg);
--ms-transform: rotateY(-180deg);
-transform: rotateY(-180deg);
-}
-.card, .card-img-top {
-border-radius: 0;
-}
-</style>
-</head>
-<body>
-<div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-<div class="image-flip" onClick="this.classList.toggle('hover');"> 
-<div class="mainflip">
-<div class="frontside">
-<div class="card" style="width:20rem;">
-<img class="card-img-top img- fluid" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="card image">
-<div class="card-body">
- <h4 class="card-title">{{student.fName}} {{student.lName}}</h4> 
-<p class="card-text">This is basic card with image on top, title, description and button.</p>
-</div>
-</div>
-</div>
-<div class="backside">
-<div class="card" style="width:20rem;">
-<div class="card-header">
-This is a Header
-</div>
-<div class="card-body">
-<h4 class="card-title">Card Title</h4>
-<p class="card-text">This is a card component with header and footer.</p>
-<a href="#" class="btn btn-info btn-md">Info Button</a>
-</div>
-<div class="card-footer">
-This is a Footer
-</div>
-</div>
-</div>
-</div>
-</div>
-</body>
-
-
-<body>
-    <div id="carouselExampleControls" class="carousel slide" style="max-height:250px; max-width: 25%; object-fit: contain;">
-        <div class="carousel-inner">
-          <div  class="carousel-item active">
-            <img  src="https://i.postimg.cc/W4Q766mZ/IMG-0853.png" class="d-block w-100" alt="ripppppppppp">
-          </div>
-        </div>
-        {% for student in our_students %}
-        <div class="carousel-inner">
-            <div  class="carousel-item">
-              <img  src="{{student.photo.url}}" class="d-block w-100" alt="ripppppppppp">
-            </div>
-          </div> {% endfor %}
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </body>
- 
--->
 {% endblock %}

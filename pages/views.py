@@ -2,45 +2,31 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Student
 
-# Create your views here.
+# This is just the default page that shows the team description
 def indexPageView(request):
-    #uncomment everything between here until the return for printing all things from the table
-    data = Student.objects.all()
-    context = {
-        'our_students' : data
-    }
-    return render(request, 'pages/index.html', context)
+    return render(request, 'pages/index.html')
 
-    #uncomment everything below here to print filtered objects from the table
-    # data = Student.objects.filter(lName="Heath")
-
-    # if data.count() > 0:
-    #     context = {
-    #         'our_students' : data
-    #     }
-    # else :
-    #     context = {
-    #         'results' : 'sad day:( no results'
-    #     }
-
-    # return render(request, 'pages/index.html', context)
-
+# simple contact page that just renders the html when the route is called
 def contactPageView(request):
     return render(request, 'pages/contact.html')
 
+# this page hasn't yet been implemented
 def loginPageView(request) :
     return render(request, 'pages/login.html')
 
+# this page is referenced in the flashcard.html page and it just returns different student objects based the filters entered
 def filterFlashcards(request):
-
     section = request.POST["section"]
     group = request.POST["group"]
+    # radio button needs a default if nothing is passed
     try:
         gender = request.POST["gender"]
     except:
         gender = ""
+
     firstName = request.POST["firstName"]
     lastName = request.POST["lastName"]
+    # uses __contains so that if nothing is entered then it doesn't filter down on the field
     data = Student.objects.filter(fName__contains=firstName, lName__contains=lastName, sectionNum__contains=section, groupNum__contains=group, gender__contains=gender)
 
     context = {
@@ -48,6 +34,7 @@ def filterFlashcards(request):
     }
     return render(request, 'pages/flashcard.html', context)
 
+# default path for flashcard.html that displays all the students
 def flashcardPageView(request):
     data = Student.objects.all()
     context = {
@@ -55,6 +42,7 @@ def flashcardPageView(request):
     }
     return render(request, 'pages/flashcard.html', context)
 
+# displays all the student objects and has an edit button on the card itself
 def libraryPageView(request):
     data = Student.objects.all()
     context = {
@@ -62,10 +50,8 @@ def libraryPageView(request):
     }
     return render(request, 'pages/library.html', context)
 
+# adds a student object and after submission redirects to the library page
 def addStudent(request):
-    # if request.method = POST: Not sure how to implement this line. It's in the text book
-    
-# add a student here, then redirect to flashcard page
 # instantiate the student
     thisStudent = Student()
     # add attributes according to the form
@@ -77,23 +63,15 @@ def addStudent(request):
     thisStudent.gender = request.POST['gender']
     thisStudent.photo = request.FILES['photo']
     thisStudent.feedback = request.POST['feedback']
-    # thisStudent.fName = request.POST['firstName']
 
     # print (thisStudent)
     thisStudent.save()
 
-    # data = Student.objects.all()
-    # context = {
-    #     'our_students' : data
-    # }
-    # return render(request, 'pages/library.html', context)
     return libraryPageView(request)
 
-
+# Gets the data for an individual student object so their data can be edited
 def studInfoPageView(request, stud_id):
-
     data = Student.objects.filter(id = stud_id)
-
     if len(data) > 1:
         data = ['There was more than one student with this id']
 
@@ -102,9 +80,8 @@ def studInfoPageView(request, stud_id):
     }
     return render (request, 'pages/studInfo.html', context)
 
-
+# This is the route that is called when we need to edit a student's information
 def editStudent(request):
-
     data = Student.objects.filter(id = request.POST['id'])
 
     if len(data) > 1:
@@ -118,54 +95,24 @@ def editStudent(request):
     updatedStud.groupNum = request.POST['groupNum']
     updatedStud.gender = request.POST['gender']
     updatedStud.feedback = request.POST['feedback']
-    # print('old photo:',updatedStud.photo.url)
-    # print('new photo:',request.POST['photo'])
-    
-    # print(request.FILES)
     if len(request.FILES) != 0:
-        # print("You've made it to checkpoint 3")
-        # updatedStud.photo = request.POST['photo']
+        # if a new file is being appended then delete the old one before creating a new object
         updatedStud.photo.delete()
         updatedStud.photo = request.FILES['photo']
         
     updatedStud.save()
-
     return libraryPageView(request)
 
-
-
+# This is where we can delete students from our database
 def delStud(request):
     data = Student.objects.filter(id = request.POST['id'])
-    
     if len(data) > 1:
         return render(request, 'pages/studInfo.html', context = 'That id has more than one student')
     
     deletedStudent = data[0]
 
-    print('We deleted {} {}'.format(deletedStudent.fName, deletedStudent.lName))
+    # delete their stored photo before deleting the student found
     deletedStudent.photo.delete()
     deletedStudent.delete()
 
     return libraryPageView(request)
-    
-
-# # for reference:
-# def indexPageView(request):
-#     outputHTML = '<html><h1>This is the Home Page!</h1>'
-#     outputHTML += '<ul><li><a href="/contact">Contact</a></li>'
-#     outputHTML += '<li><a href="/flashcards">Flashcards</a></li>'
-#     outputHTML += '<li><a href="/library">Library</a></li>'
-#     outputHTML += '<li><a href="/login">login</a></li></ul></html>'
-#     return HttpResponse(outputHTML)
-
-# def contactPageView(request):
-#     return HttpResponse('<html><h1>This is the Contact Page!</h1><ul><li><a href="/">Home</a></li><li><a href="/flashcards">Flashcards</a></li><li><a href="/library">Library</a></li><li><a href="/login">login</a></li></ul></html>')
-
-# def loginPageView(request) :
-#     return HttpResponse('<html><h1>This is the Login Page!</h1><ul><li><a href="/contact">Contact</a></li><li><a href="/flashcards">Flashcards</a></li><li><a href="/library">Library</a></li><li><a href="/">Home</a></li></ul></html>')
-
-# def flashcardPageView(request):
-#     return HttpResponse('<html><h1>This is the Flashcard Page!</h1><ul><li><a href="/contact">Contact</a></li><li><a href="/">Home</a></li><li><a href="/library">Library</a></li><li><a href="/login">login</a></li></ul></html>')
-
-# def libraryPageView(request):
-#     return HttpResponse('<html><h1>This is the Library Page!</h1><ul><li><a href="/contact">Contact</a></li><li><a href="/flashcards">Flashcards</a></li><li><a href="/">Home</a></li><li><a href="/login">login</a></li></ul></html>')

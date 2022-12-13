@@ -1,11 +1,14 @@
 {%  extends 'base.html' %}
 {% load static %}
 {% block content%}
+<!--
+    This page talks about why we chose this project and why it helps people. It serves as the intro to our project
+-->
 <div class="show">
 <div class="container">
     <div class="row">
 <div class="col-sm-8 col-md-7 py-4" style="width:600px;">
-    <h4 class="text-black"> Welcome to the LYCAN</h4>
+    <h4 class="text-black"> Welcome to LYCAN</h4>
     <p class="text-muted" style="text-align:justify" >We are group 1-4 in the Junior Core. LYCAN stands for "Learn Your Classmates and Names". We realized that it was difficult to learn more about our fellow classmates within our section as well as other sections and we know we weren't the only ones encountering this issue. By studying names, photos, fun facts, and other qualities members of the Core have, our website allows you to win friends and influence people.</p>
     <p class="text-muted" style="text-align:justify">Our website allows users to look at flashcards of students across the various sections of the 2022-2023 IS Junior Core. Our <a href="{% url 'library' %}" class="text-black">Library</a> page lists all of the students currently in our system. It also gives the user a way to add other students we may not have yet! Once you're ready to start studying, you can head over to our <a href="{% url 'flashcard' %}" class="text-black">Flashcards</a> page and see our flashcards of students. This page includes a filter section so you can narrow the number of flashcards you see. When you click on the image of a student, the card will flip and allow you to see the students information. Finally if you'd like to give us any feedback or message us about any questions, go to our <a href="{% url 'contact' %}" class="text-black">Contact</a> page and send us an email!</p>
     <p class="text-muted" style="text-align:justify">We hope this website helps our classmates get to know each other better and make our Junior Core a stronger and more unified group!</p>
